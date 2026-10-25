@@ -1,0 +1,71 @@
+@model CreationClientViewModel;
+
+
+
+@{
+    ViewData["Title"] = "Sign Up";
+}
+
+
+<div class="hero-section">
+    <div class="container">
+        <h1 class="display-4 fw-bold">Join Us</h1>
+        <p class="lead opacity-75">Create your account to order our unique and quality products.</p>
+    </div>
+</div>
+
+<div class="container pb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card custom-card shadow">
+                <div class="card-body p-5">
+                    <h3 class="text-center mb-4" style="color: var(--dark-navy);">Sign Up</h3>
+                    
+                    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+                    <form asp-action="SignUp" asp-controller="client" method="post">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Nom" class="form-label">Last Name</label>
+                                <input asp-for="Nom" class="form-control" placeholder="Your last name" />
+                                <span asp-validation-for="Nom" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Prenom" class="form-label">First Name</label>
+                                <input asp-for="Prenom" class="form-control" placeholder="Your first name" />
+                                <span asp-validation-for="Prenom" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="NumdeTelephone" class="form-label">Phone</label>
+                            <input asp-for="NumdeTelephone" class="form-control" placeholder="06 XX XX XX XX" />
+                            <span asp-validation-for="NumdeTelephone" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="EMail" class="form-label">Email</label>
+                            <input asp-for="EMail" type="email" class="form-control" placeholder="name@example.com" />
+                            <span asp-validation-for="EMail" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="MotPasse" class="form-label">Password</label>
+                            <input asp-for="MotPasse" type="password" class="form-control" placeholder="••••••••" />
+                            <span asp-validation-for="MotPasse" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-theme shadow-sm">
+                                Register Now
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <p class="text-muted small">By registering, you accept our sales conditions.</p>
+            </div>
+        </div>
+    </div>
+</div>

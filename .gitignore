@@ -1,0 +1,46 @@
+## Build and Output Directories
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+/build/
+/dist/
+
+## Do not ignore client-side library distribution files inside wwwroot
+!**/wwwroot/lib/**/dist/
+
+## Visual Studio & VS Code Artifacts
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+.vscode/
+
+## Temporary build logs and scratch dumps
+build_*.txt
+temp_*.txt
+*.log
+
+## User Secrets & Local Configuration Overrides
+appsettings.*.local.json
+secrets.json
+
+## Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+## Database Local Artifacts
+*.mdf
+*.ldf
+*.ndf
+
+## Package & Tool Caches
+*.nupkg
+packages/
+.nuget/
+project.lock.json
+project.fragment.lock.json
+artifacts/

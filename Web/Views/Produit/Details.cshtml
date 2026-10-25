@@ -1,0 +1,108 @@
+@model Aymane.netProjet.Models.ProduitListViewModel
+
+@{
+    ViewData["Title"] = "Détails du produit";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+                <div class="row g-0">
+                    <!-- IMAGE DU PRODUIT -->
+                    <div class="col-md-5">
+                        
+                    </div>
+
+                    <!-- INFORMATIONS DU PRODUIT -->
+                    <div class="col-md-7">
+                        <div class="card-body d-flex flex-column h-100">
+                            <h2 class="card-title fw-bold mb-3">@Model.Titre</h2>
+
+                            <p class="card-text text-muted mb-3">
+                                @Model.Description
+                            </p>
+
+                            <h3 class="text-success mb-3">
+                                @Model.Prix.ToString("C")
+                            </h3>
+
+                            <!-- BADGES / INFO SUPPLÉMENTAIRE -->
+                            <div class="mb-3">
+                                <span class="badge bg-primary me-1">Stock disponible</span>
+                                <span class="badge bg-warning text-dark">Livraison rapide</span>
+                            </div>
+
+                            <!-- BOUTONS -->
+                            <div class="mt-auto d-flex gap-2">
+                                <a asp-controller="Home" asp-action="Index"
+                                   class="btn btn-outline-secondary d-flex align-items-center">
+                                    <i class="bi bi-arrow-left me-2"></i> Retour
+                                </a>
+
+                                <form asp-controller="Cart" asp-action="Add" method="post" class="d-flex">
+                                    <input type="hidden" name="productId" value="@Model.Id" />
+                                    <button type="submit" class="btn btn-primary d-flex align-items-center me-2">
+                                        <i class="bi bi-cart-plus me-2"></i> Ajouter au panier
+                                    </button>
+                                </form>
+
+                                <a asp-controller="Commande" asp-action="Create"
+                                   asp-route-produitId="@Model.Id"
+                                   class="btn btn-outline-primary d-flex align-items-center">
+                                    Commander
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card-body {
+        padding: 2rem;
+    }
+
+    .card-title {
+        font-size: 2rem;
+    }
+
+    .card-text {
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+
+    .btn-primary {
+        background: linear-gradient(45deg, #007bff, #00d4ff);
+        border: none;
+        transition: transform 0.2s;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .btn-outline-secondary {
+        transition: transform 0.2s;
+    }
+
+    .btn-outline-secondary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .badge {
+        font-size: 0.9rem;
+        padding: 0.5em 0.8em;
+    }
+
+    .object-fit-cover {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+    }
+</style>

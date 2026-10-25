@@ -1,0 +1,19 @@
+@{
+    List<string> list = new List<string>();
+    list.Add("Produit 1");
+    list.Add("Produit 2");
+    list.Add("Produit 3");
+
+}
+
+<div class="text-center">
+    <h1 class="display-4">Produit @list.Count() </h1>
+</div>
+
+<div>
+    @for (int i = 0; i < list.Count() ; i++)
+    {
+        <p> @list[i]</p>
+    }
+    
+</div>

@@ -1,0 +1,56 @@
+@model Aymane.netProjet.Entities.Produit
+@{
+    ViewData["Title"] = "Create Product";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow rounded-xl border-0">
+            <div class="card-header bg-white p-4 border-bottom">
+                <h4 class="mb-0 fw-bold">Create New Product</h4>
+            </div>
+            <div class="card-body p-4">
+                <form asp-action="CreateProduct" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label asp-for="Titre" class="form-label fw-bold small text-uppercase text-secondary">Title</label>
+                        <input asp-for="Titre" class="form-control" placeholder="e.g. Double Cheeseburger" />
+                        <span asp-validation-for="Titre" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small text-uppercase text-secondary">Product Image</label>
+                        <input type="file" name="Image" class="form-control" accept="image/*" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label fw-bold small text-uppercase text-secondary">Description</label>
+                        <textarea asp-for="Description" class="form-control" rows="4" placeholder="Describe the deliciousness..."></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label asp-for="Prix" class="form-label fw-bold small text-uppercase text-secondary">Price (€)</label>
+                            <input asp-for="Prix" class="form-control" type="number" step="0.01" />
+                            <span asp-validation-for="Prix" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-end">
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" asp-for="Stock" role="switch" checked>
+                                <label class="form-check-label" asp-for="Stock">In Stock</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2 border-top pt-4">
+                        <a asp-action="Products" class="btn btn-light px-4">Cancel</a>
+                        <button type="submit" class="btn btn-success px-4 shadow-sm">
+                            <i class="fas fa-plus me-2"></i> Create Product
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

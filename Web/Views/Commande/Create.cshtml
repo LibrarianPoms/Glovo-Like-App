@@ -1,0 +1,42 @@
+@model Aymane.netProjet.Entities.Produit
+@{
+    ViewData["Title"] = "Confirmer la commande";
+    Layout = "_Layout";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">Confirmer votre commande</h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <strong>Produit :</strong> @Model.Titre <br />
+                        <strong>Prix :</strong> @Model.Prix.ToString("C")
+                    </div>
+
+                    <form asp-action="Create" method="post">
+                        <input type="hidden" name="produitId" value="@Model.Id" />
+
+                        <div class="mb-3">
+                            <label class="form-label">Adresse de livraison</label>
+                            <textarea name="adresse" class="form-control" rows="3" required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Numéro de téléphone pour la livraison</label>
+                            <input type="text" name="telephone" class="form-control" required />
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg">Confirmer et Commander</button>
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Annuler</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,98 @@
+@model Aymane.netProjet.Entities.Produit
+@{
+    ViewData["Title"] = "Edit Product";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid px-4">
+    <div class="row align-items-center mb-4">
+        <div class="col">
+            <h3 class="fw-bold mb-0 text-dark">Edit Product</h3>
+            <p class="text-muted small mb-0">Update product details and image</p>
+        </div>
+        <div class="col-auto">
+            <a asp-action="Products" class="btn btn-outline-secondary rounded-pill px-4">
+                <i class="fas fa-arrow-left me-2"></i> Back to List
+            </a>
+        </div>
+    </div>
+
+    <form asp-action="EditProduct" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+        
+        <div class="row g-4">
+            <!-- Left Column: Image Preview & Upload -->
+            <div class="col-lg-4">
+                <div class="card shadow-sm border-0 rounded-xl h-100">
+                    <div class="card-body p-4 text-center d-flex flex-column justify-content-center">
+                        <h6 class="fw-bold text-uppercase text-muted small mb-3">Product Image</h6>
+                        
+                        <div class="position-relative d-inline-block mx-auto mb-4">
+                             <!-- Using a placeholder or actual image if available -->
+                            <div class="bg-gray-100 rounded-3 d-flex align-items-center justify-content-center overflow-hidden" style="width: 250px; height: 250px;">
+                                <i class="fas fa-hamburger text-primary fa-4x opacity-25"></i>
+                                <!-- If you have a real image path, use an <img> tag here instead -->
+                                @* <img src="@Model.ImageUrl" class="img-fluid" alt="Product Image"> *@
+                            </div>
+                            
+                            <label for="imageUpload" class="btn btn-primary btn-sm rounded-circle shadow position-absolute bottom-0 end-0 m-2" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-camera"></i>
+                            </label>
+                            <input type="file" id="imageUpload" name="Image" class="d-none" accept="image/*" />
+                        </div>
+                        
+                        <p class="small text-muted mb-0">
+                            Allowed: .jpg, .png, .jpeg<br>
+                            Max size: 2MB
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Product Details Form -->
+            <div class="col-lg-8">
+                <div class="card shadow-sm border-0 rounded-xl">
+                    <div class="card-body p-5">
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <label asp-for="Titre" class="form-label fw-bold text-dark">Product Title</label>
+                                <input asp-for="Titre" class="form-control form-control-lg bg-light border-0" placeholder="e.g. Supreme Pizza" />
+                                <span asp-validation-for="Titre" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label asp-for="Description" class="form-label fw-bold text-dark">Description</label>
+                                <textarea asp-for="Description" class="form-control bg-light border-0" rows="4" placeholder="Enter a delicious description..."></textarea>
+                                <span asp-validation-for="Description" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="Prix" class="form-label fw-bold text-dark">Price (€)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text border-0 bg-light fw-bold">€</span>
+                                    <input asp-for="Prix" class="form-control form-control-lg bg-light border-0" type="number" step="0.01" />
+                                </div>
+                                <span asp-validation-for="Prix" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark">Status</label>
+                                <div class="form-check form-switch p-3 bg-light rounded d-flex align-items-center justify-content-between">
+                                    <label class="form-check-label mb-0" asp-for="Stock">Available in Stock</label>
+                                    <input class="form-check-input ms-0" type="checkbox" asp-for="Stock" role="switch" style="width: 3em; height: 1.5em;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-3 mt-5">
+                            <a asp-action="Products" class="btn btn-light px-5 py-2 fw-bold">Cancel</a>
+                            <button type="submit" class="btn btn-primary px-5 py-2 fw-bold shadow-glow">
+                                Save Changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

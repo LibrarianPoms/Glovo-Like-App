@@ -1,0 +1,131 @@
+﻿/* ======================
+   DASHBOARD SPECIFIC
+   ====================== */
+
+
+/* Use global body from site.css */
+
+
+/* Sidebar / Navigation specific to dashboard if any, otherwise standard layout */
+
+
+/* ======================
+   CARDS & STATS
+   ====================== */
+
+
+/* Inherits base .card from site.css, adding specific dashboard tweaks */
+
+.dashboard-stat-card {
+    border: none;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.08), rgba(249, 115, 22, 0.06));
+    box-shadow: var(--shadow-sm);
+}
+
+.dashboard-stat-card.success {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.12), rgba(251, 191, 36, 0.06));
+}
+
+.dashboard-stat-card.warning {
+    background: linear-gradient(135deg, rgba(234, 179, 8, 0.12), rgba(249, 115, 22, 0.06));
+}
+
+.dashboard-stat-card.danger {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(248, 250, 252, 0.9));
+}
+
+.dashboard-stat-card.info {
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.14), rgba(251, 191, 36, 0.04));
+}
+
+.card-body h6 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: var(--gray-500);
+    margin-bottom: 0.5rem;
+}
+
+.card-body h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0;
+    color: var(--gray-800);
+}
+
+
+/* ======================
+   TABLES
+   ====================== */
+
+.table-responsive {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    background: white;
+    overflow: hidden;
+}
+
+.table thead th {
+    background: linear-gradient(90deg, rgba(249, 115, 22, 0.06), rgba(241, 245, 249, 1));
+    border-bottom: 1px solid var(--gray-200);
+    color: var(--gray-700);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+
+/* ======================
+   TIMELINE / ACTIVITY
+   ====================== */
+
+.list-group-item {
+    border: none;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--gray-100);
+    transition: background-color 0.2s;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+.list-group-item:hover {
+    background-color: var(--gray-100);
+}
+
+.list-group-item i {
+    width: 24px;
+    text-align: center;
+    margin-right: 12px;
+    color: var(--primary);
+}
+
+
+/* ======================
+   BADGES
+   ====================== */
+
+.badge {
+    padding: 0.5em 0.8em;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    border-radius: 6px;
+}
+
+.bg-success-soft {
+    background-color: rgba(6, 214, 160, 0.15);
+    color: #05a57b;
+}
+
+.bg-danger-soft {
+    background-color: rgba(239, 71, 111, 0.15);
+    color: #c92a4b;
+}
+
+.bg-warning-soft {
+    background-color: rgba(255, 209, 102, 0.15);
+    color: #b38b00;
+}

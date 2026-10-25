@@ -1,0 +1,224 @@
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+    <!-- STAT CARDS -->
+        <div class="col-md-6">
+            <a href="@Url.Action("Users", "Admin")" class="text-decoration-none group-hover">
+                <div class="card shadow-sm border-0 h-100 hover-lift transition-all">
+                    <div class="card-body d-flex align-items-center justify-content-between p-4">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary-soft p-3 rounded-circle me-3 text-primary">
+                                <i class="fas fa-users fa-2x"></i>
+                            </div>
+                            <div>
+                                <h4 class="fw-bold text-dark mb-1">User Management</h4>
+                                <p class="text-muted mb-0">View and manage users</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-right text-muted"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a href="@Url.Action("Products", "Admin")" class="text-decoration-none group-hover">
+                <div class="card shadow-sm border-0 h-100 hover-lift transition-all">
+                    <div class="card-body d-flex align-items-center justify-content-between p-4">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-warning-soft p-3 rounded-circle me-3 text-warning">
+                                <i class="fas fa-box-open fa-2x"></i>
+                            </div>
+                            <div>
+                                <h4 class="fw-bold text-dark mb-1">Product Management</h4>
+                                <p class="text-muted mb-0">Add, edit, or remove products</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-right text-muted"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-3">
+            <div class="card dashboard-stat-card border-0 h-100">
+                <div class="card-body p-4">
+                    <h6 class="text-uppercase text-secondary fw-bold mb-3">Total Users</h6>
+                    <div class="d-flex align-items-baseline">
+                        <h2 class="fw-bold mb-0">@ViewData["TotalUsers"]</h2>
+                        <span class="ms-2 badge bg-success-soft text-success rounded-pill">+12%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card dashboard-stat-card info border-0 h-100">
+                <div class="card-body p-4">
+                    <h6 class="text-uppercase text-info fw-bold mb-3">Total Orders</h6>
+                    <h2 class="fw-bold mb-0 text-dark">@ViewData["TotalOrders"]</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card dashboard-stat-card success border-0 h-100">
+                <div class="card-body p-4">
+                    <h6 class="text-uppercase text-success fw-bold mb-3">Revenue</h6>
+                    <h2 class="fw-bold mb-0 text-dark">@(((decimal)ViewData["TotalRevenue"]).ToString("C"))</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card dashboard-stat-card warning border-0 h-100">
+                <div class="card-body p-4">
+                    <h6 class="text-uppercase text-warning fw-bold mb-3">Pending Tickets</h6>
+                    <h2 class="fw-bold mb-0 text-dark">@ViewData["PendingTickets"]</h2>
+                    <small class="text-muted d-block mt-1">Feature coming soon</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TABLE + ACTIVITY -->
+    <div class="row g-4">
+        <!-- TABLE -->
+        <div class="col-lg-8">
+            <div class="card shadow rounded-xl border-0 h-100">
+                <div class="card-header bg-white border-bottom p-4">
+                    <h5 class="fw-bold mb-0">Recent Orders</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="bg-gray-100 text-secondary text-uppercase small fw-bold">
+                                <tr>
+                                    <th class="ps-4">#ID</th>
+                                    <th>Customer</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Total</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var order in ViewBag.RecentOrders)
+                                {
+                                    <tr>
+                                        <td class="ps-4 fw-bold">#@order.Id</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="rounded-circle bg-gray-200 p-2 me-2 d-flex align-items-center justify-content-center" style="width:35px;height:35px">
+                                                    <i class="fas fa-user small text-secondary"></i>
+                                                </div>
+                                                <span class="fw-semibold">@order.ClientNom</span>
+                                            </div>
+                                        </td>
+                                        <td class="text-muted">@order.CreateAt.ToShortDateString()</td>
+                                        <td>
+                                            @if (order.Statut.ToString() == "Payee" || order.Statut.ToString() == "Livree")
+                                            {
+                                                <span class="badge bg-success-soft text-success rounded-pill px-3">Paid</span>
+                                            }
+                                            else if (order.Statut.ToString() == "Annulee")
+                                            {
+                                                <span class="badge bg-danger-soft text-danger rounded-pill px-3">Cancelled</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-warning-soft text-warning rounded-pill px-3">@order.Statut</span>
+                                            }
+                                        </td>
+                                        <td class="fw-bold">@order.Montant.ToString("C")</td>
+                                        <td>
+                                            @if (order.Statut.ToString() != "Livree" && order.Statut.ToString() != "Annulee")
+                                            {
+                                                <div class="btn-group">
+                                                    <form asp-action="SetOrderStatus" asp-controller="Admin" method="post">
+                                                        <input type="hidden" name="id" value="@order.Id" />
+                                                        <input type="hidden" name="status" value="Livree" />
+                                                        <button type="submit" class="btn btn-sm btn-success rounded-start" title="Mark as Completed">
+                                                            <i class="fas fa-check"></i>
+                                                        </button>
+                                                    </form>
+                                                    <form asp-action="SetOrderStatus" asp-controller="Admin" method="post">
+                                                        <input type="hidden" name="id" value="@order.Id" />
+                                                        <input type="hidden" name="status" value="Annulee" />
+                                                        <button type="submit" class="btn btn-sm btn-outline-danger rounded-end" title="Reject Order">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-muted small fst-italic">Completed</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACTIVITY -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm border-0 h-100 rounded-xl">
+                <div class="card-header bg-white border-bottom p-4">
+                    <h5 class="fw-bold mb-0">Recent Activity</h5>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item p-3 border-light d-flex align-items-center">
+                            <span class="bg-primary-soft text-primary rounded p-2 me-3"><i class="fas fa-user-plus"></i></span>
+                            <div>
+                                <h6 class="mb-0 fw-bold text-dark">New User Registered</h6>
+                                <small class="text-muted">2 minutes ago</small>
+                            </div>
+                        </li>
+                        <li class="list-group-item p-3 border-light d-flex align-items-center">
+                            <span class="bg-success-soft text-success rounded p-2 me-3"><i class="fas fa-shopping-bag"></i></span>
+                            <div>
+                                <h6 class="mb-0 fw-bold text-dark">New Order Received</h6>
+                                <small class="text-muted">15 minutes ago</small>
+                            </div>
+                        </li>
+                        <li class="list-group-item p-3 border-light d-flex align-items-center">
+                            <span class="bg-info-soft text-info rounded p-2 me-3"><i class="fas fa-credit-card"></i></span>
+                            <div>
+                                <h6 class="mb-0 fw-bold text-dark">Payment Confirmed</h6>
+                                <small class="text-muted">1 hour ago</small>
+                            </div>
+                        </li>
+                        <li class="list-group-item p-3 border-light d-flex align-items-center">
+                            <span class="bg-warning-soft text-warning rounded p-2 me-3"><i class="fas fa-ticket-alt"></i></span>
+                            <div>
+                                <h6 class="mb-0 fw-bold text-dark">Ticket #404 Pending</h6>
+                                <small class="text-muted">2 hours ago</small>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hover-lift:hover { transform: translateY(-5px); }
+    .transition-all { transition: all 0.3s ease; }
+    .bg-primary-soft { background-color: rgba(249, 115, 22, 0.1); color: var(--primary); }
+    .bg-success-soft { background-color: rgba(16, 185, 129, 0.1); color: var(--success); }
+    .bg-warning-soft { background-color: rgba(245, 158, 11, 0.1); color: var(--warning); }
+    .bg-info-soft { background-color: rgba(14, 165, 233, 0.1); color: var(--info); }
+    .bg-danger-soft { background-color: rgba(239, 68, 68, 0.1); color: var(--danger); }
+</style>

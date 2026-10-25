@@ -1,0 +1,78 @@
+@model List<Aymane.netProjet.Entities.Commande>
+@{
+    ViewData["Title"] = "My Orders";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-sm border-0 rounded-xl">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center p-4">
+                    <h3 class="mb-0 fw-bold">Order History</h3>
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-sm btn-outline-secondary rounded-pill">
+                        <i class="fas fa-arrow-left me-2"></i> Back to Shop
+                    </a>
+                </div>
+                <div class="card-body p-0">
+                    @if (Model == null || !Model.Any())
+                    {
+                        <div class="text-center py-5">
+                            <div class="alert alert-light d-inline-block px-5 py-4 rounded-xl">
+                                <i class="fas fa-box-open fa-3x mb-3 text-muted"></i>
+                                <h4 class="fw-bold text-muted">No orders yet</h4>
+                                <p class="mb-0">You haven't placed any orders.</p>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="bg-gray-100 text-uppercase small fw-bold text-secondary">
+                                    <tr>
+                                        <th class="ps-4">#ID</th>
+                                        <th>Date</th>
+                                        <th>Address</th>
+                                        <th>Status</th>
+                                        <th class="text-end pe-4">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var order in Model)
+                                    {
+                                        <tr>
+                                            <td class="ps-4 fw-bold text-primary">#@order.Id</td>
+                                            <td>@order.CreateAt.ToShortDateString()</td>
+                                            <td class="text-muted"><small>@order.Adresse</small></td>
+                                            <td>
+                                                @if (order.Statut.ToString() == "Livree" || order.Statut.ToString() == "Payee")
+                                                {
+                                                    <span class="badge bg-success-soft text-success rounded-pill px-3">Completed</span>
+                                                }
+                                                else if (order.Statut.ToString() == "Annulee")
+                                                {
+                                                    <span class="badge bg-danger-soft text-danger rounded-pill px-3">Cancelled</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-warning-soft text-warning rounded-pill px-3">@order.Statut</span>
+                                                }
+                                            </td>
+                                            <td class="text-end fw-bold pe-4">@order.Montant.ToString("C")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-success-soft { background-color: rgba(16, 185, 129, 0.1); color: var(--success); }
+    .bg-danger-soft { background-color: rgba(239, 68, 68, 0.1); color: var(--danger); }
+    .bg-warning-soft { background-color: rgba(245, 158, 11, 0.1); color: var(--warning); }
+</style>
